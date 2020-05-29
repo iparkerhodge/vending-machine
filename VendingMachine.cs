@@ -57,23 +57,21 @@ namespace Vending {
 
         // Return the cheapest product or null if there are no products
         public Product GetCheapest () {
-            List<Product> sortedByPrice = _products.OrderBy (p => p.Price).ToList ();
-            Product minimum = sortedByPrice[0];
-            return minimum;
+            double minPrice = _products.Min (p => p.Price);
+            Product cheapestProduct = _products.FirstOrDefault (p => p.Price == minPrice);
+            return cheapestProduct;
         }
 
         // Return the most expensive product or null if there are no products
         public Product GetMostExpensive () {
-            List<Product> sortedByPrice = _products.OrderByDescending (p => p.Price).ToList ();
-            Product minimum = sortedByPrice[0];
-            return minimum;
+            double maxPrice = _products.Max (p => p.Price);
+            Product boujiestProduct = _products.FirstOrDefault (p => p.Price == maxPrice);
+            return boujiestProduct;
         }
 
         // Return all the product names in alphabetical ordere
         public List<string> GetProductNames () {
-            List<string> names = _products.Select (p => p.Name).ToList ();
-            List<string> sortedNames = names.OrderBy (n => n).ToList ();
-            return sortedNames;
+            return _products.Select (p => p.Name).OrderBy (n => n).ToList ();
         }
 
         // Property to represent the total of all the products' prices.
