@@ -16,7 +16,14 @@ namespace Vending {
 
         // Add a new product to the Vending Machine (For stocking machine)
         public void AddProduct (Product newProduct) {
-            _products.Add (newProduct);
+            List<int> allIds = _products.Select (p => p.Id).ToList ();
+            int newProductId = newProduct.Id;
+
+            if (allIds.Contains (newProductId)) {
+                Console.WriteLine ("This product ID already exists.");
+            } else {
+                _products.Add (newProduct);
+            }
         }
 
         // Remove a product from the Vending Machine (for purchasing a product)
